@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repository to GitHub Pages Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .link {
+            color: blue;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .warning {
+            margin-top: 10px;
+            color: red;
+            font-size: 14px;
+        }
+        h2 {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>GitHub Repository to GitHub Pages Converter</h1>
+    <p>Masukkan link GitHub repository:</p>
+    <input type="text" id="githubLink" placeholder="https://github.com/username/repository">
+    <button onclick="convertToPages()">Convert</button>
+
+    <div id="result"></div>
+    <p class="warning">Catatan: Tool ini hanya mengonversi link ke format GitHub Pages, namun tidak dapat memastikan apakah halaman GitHub Pages tersebut sudah aktif atau tidak.</p>
+
+    <h2>Tutorial 1: Cara Membuat GitHub Pages</h2>
+    <ol>
+        <li>Buka repository GitHub yang ingin Anda gunakan untuk GitHub Pages.</li>
+        <li>Pilih tab <strong>Settings</strong> di repository tersebut.</li>
+        <li>Scroll ke bawah hingga menemukan section <strong>GitHub Pages</strong>.</li>
+        <li>Setel <strong>Source</strong> menjadi <strong>main branch</strong> atau branch lainnya sesuai kebutuhan.</li>
+        <li>Setelah diaktifkan, GitHub Pages Anda akan tersedia di link dengan format: <code>https://username.github.io/repository</code>.</li>
+    </ol>
+
+    <h2>Tutorial 2: Cara Convert GitHub Repository ke GitHub Pages</h2>
+    <ol>
+        <li>Salin link GitHub repository yang ingin di-convert. Sebagai contoh: <code>https://github.com/username/repository</code>. Pastikan link tersebut valid dan mengarah ke repository yang benar.</li>
+        <li>Buka halaman ini dan masukkan link repository GitHub yang telah Anda salin ke dalam kotak input di atas.</li>
+        <li>Setelah memasukkan link, klik tombol <strong>Convert</strong>. Jika format link sudah benar, link GitHub Pages Anda akan dihasilkan secara otomatis di bawah kotak input.</li>
+        <li>Salin atau klik link tersebut untuk membuka GitHub Pages Anda di tab baru. Pastikan GitHub Pages sudah diaktifkan di pengaturan repository Anda.</li>
+    </ol>
+
+    <h2>Tutorial 3: Cara Convert GitHub Pages ke GitHub Repository</h2>
+    <p>Sebelum melanjutkan, pastikan Anda telah mencoba <a href="pages-to-repo.html">tools kedua</a> untuk membalik konversi dari GitHub Pages ke GitHub repository.</p>
+    <ol>
+        <li>Jika Anda memiliki link GitHub Pages (contoh: <code>https://username.github.io/repository</code>), dan ingin mengembalikan link tersebut ke repository asli, buka <a href="pages-to-repo.html">tools kedua</a>.</li>
+        <li>Masukkan link GitHub Pages tersebut ke tools kedua.</li>
+        <li>Klik tombol <strong>Convert</strong> untuk mendapatkan kembali link GitHub repository asli.</li>
+        <li>Link GitHub repository akan muncul di bawah, dan Anda dapat menyalin atau mengunjungi repository tersebut.</li>
+    </ol>
+
+    <script>
+        function convertToPages() {
+            const input = document.getElementById("githubLink").value;
+            if (!input.startsWith("https://github.com/")) {
+                alert("Masukkan link GitHub yang valid.");
+                return;
+            }
+
+            const parts = input.replace("https://github.com/", "").split("/");
+            if (parts.length < 2) {
+                alert("Masukkan link GitHub yang valid.");
+                return;
+            }
+
+            const username = parts[0].toLowerCase();
+            const repository = parts[1].toLowerCase();
+            
+            const extraPath = parts.slice(3).join("/");
+
+            let githubPagesLink = `https://${username}.github.io/${repository}`;
+            if (extraPath) {
+                githubPagesLink += `/${extraPath}`;
+            }
+            document.getElementById("result").innerHTML = `
+                <p>Link GitHub Pages:</p>
+                <a href="${githubPagesLink}" target="_blank" class="link">${githubPagesLink}</a>
+            `;
+        }
+    </script>
+
+</body>
+</html>
